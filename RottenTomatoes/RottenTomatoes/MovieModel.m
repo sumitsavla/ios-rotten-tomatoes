@@ -19,6 +19,7 @@
         self.crowdRating = [NSString stringWithFormat:@"%@%%", movie[@"ratings"][@"audience_score"]];
         self.criticRating = [NSString stringWithFormat:@"%@%%", movie[@"ratings"][@"critics_score"]];
         self.posterUrl = [NSURL URLWithString:movie[@"posters"][@"profile"]];
+        self.bigPosterUrl = [NSURL URLWithString:movie[@"posters"][@"original"]];
     }
     
     return self;

@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *synopsis;
 @property (nonatomic) NSURL *posterUrl;
+@property (nonatomic) NSURL *bigPosterUrl;
 @property (nonatomic) NSString *crowdRating;
 @property (nonatomic) NSString *criticRating;
 

@@ -172,7 +172,7 @@ void (^getMovies)(NSString *url, NSInteger btnType) = ^void(NSString *url, NSInt
     MovieModel *movieModel = self.movies[indexPath.row];
 
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    MovieViewController *mvc = [[MovieViewController alloc] init];
+    MovieViewController *mvc = [[MovieViewController alloc]init];
     mvc.selectedMovie = movieModel;
     [self.navigationController pushViewController:mvc animated:YES];
     
