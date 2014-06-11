@@ -27,6 +27,11 @@ But as posters also have text, movie info was not very readable. Hence switched 
 2. Tried implementing tab bar control but it was tricky as using one MovieListVC to show all 3 movie lists. 
 3. Created two instance of same vc for 2 tabs, but only second tab was showing data and first tab view was empty
 
+Libraries used:
+1. cocoapod
+2. AFNetworking
+3. MBProgressHUD
+4. DejalActivityView 
 
 Walkthrough of all user stories:
 
