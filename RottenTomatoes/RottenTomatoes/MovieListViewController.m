@@ -12,6 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
 #import "DejalActivityView.h"
+#import "MovieModel.h"
 
 @interface MovieListViewController ()
 
@@ -56,28 +57,33 @@ __weak MovieListViewController *weakSelf;
     [refreshView addSubview:self.refreshControl];
 
     self.moviesTableView.dataSource = self;
-    self.moviesTableView.rowHeight = 130;
+    self.moviesTableView.rowHeight = 110;
+
+    [self.moviesTableView setSeparatorInset:UIEdgeInsetsZero];
+    
     [self.moviesTableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:(@"MovieCell")];
     
     NSString *topBoxOfficeURL = @"http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?apikey=kb4nmzm3r922wednnyknd2mt&limit=10";
     getMovies(topBoxOfficeURL, 0);
-    
+
     // Do any additional setup after loading the view from its nib.
-    self.rightButton = [[UIBarButtonItem alloc] initWithTitle:@"In Theater" style:UIBarButtonItemStylePlain target:self action:@selector(onRightButton:)];
+    self.rightButton = [[UIBarButtonItem alloc] initWithTitle:@"New Arrivals" style:UIBarButtonItemStylePlain target:self action:@selector(onRightButton:)];
     self.navigationItem.rightBarButtonItem = self.rightButton;
     
-    self.leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Top 10" style:UIBarButtonItemStylePlain target:self action:@selector(onLeftButton:)];
+    self.leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(onLeftButton:)];
+    
 }
 
 void (^setMovies)(NSInteger btnType, NSArray *movieArr) = ^void(NSInteger btnType, NSArray *movieArr){
-    weakSelf.movies = movieArr;
+    
+    weakSelf.movies = [MovieModel moviesWithArray:movieArr];
     [weakSelf.moviesTableView reloadData];
     weakSelf.moviesTableView.hidden = NO;
     weakSelf.navigationItem.rightBarButtonItem=nil;
     if(btnType == 1 || btnType == 2){
         weakSelf.navigationItem.leftBarButtonItem=weakSelf.leftButton;
         if(btnType == 1){
-            weakSelf.navigationItem.title = @"In Theater";
+            weakSelf.navigationItem.title = @"New Arrivals";
             weakSelf.openingMovies = movieArr;
         } else {
             weakSelf.navigationItem.title = @"Coming Soon";
@@ -92,6 +98,7 @@ void (^setMovies)(NSInteger btnType, NSArray *movieArr) = ^void(NSInteger btnTyp
 };
 
 void (^getMovies)(NSString *url, NSInteger btnType) = ^void(NSString *url, NSInteger btnType){
+    
     weakSelf.moviesTableView.hidden = YES;
     [DejalActivityView activityViewForView:weakSelf.view withLabel:@"Loading Movies..."];
     
@@ -101,7 +108,7 @@ void (^getMovies)(NSString *url, NSInteger btnType) = ^void(NSString *url, NSInt
         if (connectionError)
         {           // Configure for text only and offset down
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"Network Error...";
+            hud.labelText = @"Network Error! Try Again...";
             hud.margin = 10.f;
             hud.yOffset = -150.f;
             hud.removeFromSuperViewOnHide = YES;
@@ -122,7 +129,6 @@ void (^getMovies)(NSString *url, NSInteger btnType) = ^void(NSString *url, NSInt
 };
 
 - (void)refreshTable {
-    //TODO: refresh your data
     [self.refreshControl endRefreshing];
     self.topMovies = self.movies;
     
@@ -138,31 +144,21 @@ void (^getMovies)(NSString *url, NSInteger btnType) = ^void(NSString *url, NSInt
     
     MovieCell *movieCell = [_moviesTableView dequeueReusableCellWithIdentifier:@"MovieCell"];
     
-    //UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
-    
-    NSDictionary *movie = self.movies[indexPath.row];
-    NSDictionary *movieRatings = movie[@"ratings"];
-    NSURL *posterUrl = [NSURL URLWithString:movie[@"posters"][@"profile"]];
+    MovieModel *movieModel = self.movies[indexPath.row];
+    NSURL *posterUrl = movieModel.posterUrl;
     NSURLRequest *request = [NSURLRequest requestWithURL:posterUrl];
     __weak MovieCell *weakMovieCell = movieCell;
+    movieCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     [movieCell.posterImg setImageWithURLRequest:request
                                placeholderImage:nil
                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-
-                                            weakMovieCell.backgroundView.opaque = NO;
-                                            UIImageView *imgview = [[UIImageView alloc] initWithImage:image];
-                                            [imgview setAlpha:0.3f];
-                                            weakMovieCell.backgroundView = imgview;
-                                         //   weakMovieCell.backgroundView.backgroundColor = [UIColor yellowColor];
-                                       //     weakMovieCell.posterImg.image = image;
+                                          weakMovieCell.posterImg.image = image;
                                             [weakMovieCell setNeedsLayout];
-                                          //  weakMovieCell.selectionStyle = UITableViewCellStyleValue2;
-                                            
                                         } failure:nil];
-    movieCell.titleLbl.text = movie[@"title"];
-    movieCell.criticsRLbl.text = [NSString stringWithFormat:@"%@", movieRatings[@"critics_score"]];
-    movieCell.crowdRLbl.text = [NSString stringWithFormat:@"%@", movie[@"ratings"][@"audience_score"]];
+    movieCell.titleLbl.text = movieModel.title;
+    movieCell.criticsRLbl.text = movieModel.criticRating;
+    movieCell.crowdRLbl.text = movieModel.crowdRating;
     
     return movieCell;
 }
@@ -173,10 +169,11 @@ void (^getMovies)(NSString *url, NSInteger btnType) = ^void(NSString *url, NSInt
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-    
+    MovieModel *movieModel = self.movies[indexPath.row];
+
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     MovieViewController *mvc = [[MovieViewController alloc] init];
-    mvc.selectedMovie = self.movies[indexPath.row];
+    mvc.selectedMovie = movieModel;
     [self.navigationController pushViewController:mvc animated:YES];
     
 }

@@ -25,6 +25,9 @@
 		9F37081619441489003BFF35 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F37081419441489003BFF35 /* MovieCell.m */; };
 		9F37081719441489003BFF35 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F37081519441489003BFF35 /* MovieCell.xib */; };
 		9F370820194437EB003BFF35 /* movieDump.json in Resources */ = {isa = PBXBuildFile; fileRef = 9F37081F194437EB003BFF35 /* movieDump.json */; };
+		9F94CF701946ECB20086C00D /* MovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F94CF6F1946ECB20086C00D /* MovieModel.m */; };
+		9FA4CB8219472BBB002B6450 /* tViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA4CB8019472BBB002B6450 /* tViewController.m */; };
+		9FA4CB8319472BBB002B6450 /* tViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FA4CB8119472BBB002B6450 /* tViewController.xib */; };
 		9FFEF60419446FC300CC3DFE /* MovieListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FFEF60219446FC300CC3DFE /* MovieListViewController.m */; };
 		9FFEF60519446FC300CC3DFE /* MovieListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFEF60319446FC300CC3DFE /* MovieListViewController.xib */; };
 /* End PBXBuildFile section */
@@ -64,6 +67,11 @@
 		9F37081419441489003BFF35 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
 		9F37081519441489003BFF35 /* MovieCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 		9F37081F194437EB003BFF35 /* movieDump.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movieDump.json; sourceTree = "<group>"; };
+		9F94CF6E1946ECB20086C00D /* MovieModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieModel.h; sourceTree = "<group>"; };
+		9F94CF6F1946ECB20086C00D /* MovieModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieModel.m; sourceTree = "<group>"; };
+		9FA4CB7F19472BBB002B6450 /* tViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tViewController.h; sourceTree = "<group>"; };
+		9FA4CB8019472BBB002B6450 /* tViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tViewController.m; sourceTree = "<group>"; };
+		9FA4CB8119472BBB002B6450 /* tViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tViewController.xib; sourceTree = "<group>"; };
 		9FFEF60119446FC300CC3DFE /* MovieListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieListViewController.h; sourceTree = "<group>"; };
 		9FFEF60219446FC300CC3DFE /* MovieListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieListViewController.m; sourceTree = "<group>"; };
 		9FFEF60319446FC300CC3DFE /* MovieListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieListViewController.xib; sourceTree = "<group>"; };
@@ -181,6 +189,9 @@
 				9FFEF60119446FC300CC3DFE /* MovieListViewController.h */,
 				9FFEF60219446FC300CC3DFE /* MovieListViewController.m */,
 				9FFEF60319446FC300CC3DFE /* MovieListViewController.xib */,
+				9FA4CB7F19472BBB002B6450 /* tViewController.h */,
+				9FA4CB8019472BBB002B6450 /* tViewController.m */,
+				9FA4CB8119472BBB002B6450 /* tViewController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -198,6 +209,8 @@
 		9F37081819441508003BFF35 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9F94CF6E1946ECB20086C00D /* MovieModel.h */,
+				9F94CF6F1946ECB20086C00D /* MovieModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -292,6 +305,7 @@
 				9F3707E61943E5A8003BFF35 /* Images.xcassets in Resources */,
 				9F3708111943F8C9003BFF35 /* MovieViewController.xib in Resources */,
 				9F37081719441489003BFF35 /* MovieCell.xib in Resources */,
+				9FA4CB8319472BBB002B6450 /* tViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +358,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F37081619441489003BFF35 /* MovieCell.m in Sources */,
+				9FA4CB8219472BBB002B6450 /* tViewController.m in Sources */,
 				9F3707E41943E5A8003BFF35 /* AppDelegate.m in Sources */,
+				9F94CF701946ECB20086C00D /* MovieModel.m in Sources */,
 				9F3707E01943E5A8003BFF35 /* main.m in Sources */,
 				9F3708101943F8C9003BFF35 /* MovieViewController.m in Sources */,
 				9FFEF60419446FC300CC3DFE /* MovieListViewController.m in Sources */,

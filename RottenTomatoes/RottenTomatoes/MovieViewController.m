@@ -28,8 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = self.selectedMovie[@"title"];
-    self.synopsisLbl.text = self.selectedMovie[@"synopsis"];
+    [self.navigationItem.backBarButtonItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+    self.navigationItem.title = self.selectedMovie.title;
+    self.synopsisLbl.text = self.selectedMovie.synopsis;
     // Do any additional setup after loading the view from its nib.
 }
 

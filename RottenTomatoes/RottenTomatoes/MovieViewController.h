@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MovieModel.h"
 
 @interface MovieViewController : UIViewController
 
-@property (strong, nonatomic, readwrite) NSDictionary* selectedMovie;
+@property (strong, nonatomic, readwrite) MovieModel* selectedMovie;
 
 @end
