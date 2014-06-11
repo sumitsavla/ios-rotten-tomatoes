@@ -35,7 +35,7 @@ Libraries used:
 
 Walkthrough of all user stories:
 
-![Video Walkthrough](anim_rotten_tomatoes.gif)
+![Video Walkthrough](https://raw.githubusercontent.com/sumitsavla/ios-rotten-tomatoes/master/RottenTomatoes/anim_rotten_tomatoes.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
